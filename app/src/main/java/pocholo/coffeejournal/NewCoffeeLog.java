@@ -1,23 +1,30 @@
 package pocholo.coffeejournal;
+
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -26,15 +33,17 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
-public class NewCoffeeLog extends Activity implements OnClickListener  {
+public class NewCoffeeLog extends Activity implements OnClickListener {
 
     //UI References
     private EditText brewTxt;
     private EditText roastTxt;
-
+    private RadioGroup rgSweet;
+    private RadioGroup rgSour;
+    private RadioGroup rgFloral;
     private DatePickerDialog brewDatePickerDialog;
     private DatePickerDialog roastDatePickerDialog;
-
+    private  RadarChart radarChart;
     private SimpleDateFormat dateFormatter;
 
     @Override
@@ -48,22 +57,77 @@ public class NewCoffeeLog extends Activity implements OnClickListener  {
 
         setDateTimeField();
 
-        RadarChart chart = (RadarChart) findViewById(R.id.chart);
+        radarChart = (RadarChart) findViewById(R.id.chart);
+        if(radarChart != null){
+            RadarData data = new RadarData(getXAxisValues(), getDataSet());
+            radarChart.setData(data);
+            radarChart.setDescription("TASTE PROFILE");
+            radarChart.getYAxis().setAxisMinValue(6);
+            radarChart.getYAxis().setAxisMaxValue(6);
+            radarChart.animateXY(2000, 2000);
+            radarChart.setWebColor(Color.GRAY);
+            radarChart.setWebColorInner(Color.GREEN);
+            //radarChart.setBackgroundColor(Color.BLUE);
+            radarChart.setDrawWeb(false);
 
-        RadarData data = new RadarData(getXAxisValues(), getDataSet());
-        chart.setData(data);
-        chart.setDescription("My Chart");
-        chart.animateXY(2000, 2000);
-        chart.invalidate();
+            // Hide Legends
+            Legend legend = radarChart.getLegend();
+            legend.setEnabled(false);
+            radarChart.invalidate();
+        }
+
+
+
+        //rgSweet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rgSweet.setOnCheckedChangeListener(new HandleClick());
+        rgSour.setOnCheckedChangeListener(new HandleClick());
+        rgFloral.setOnCheckedChangeListener(new HandleClick());
+        /*
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.d("chk", "id" + checkedId);
+                RadarData data = new RadarData(getXAxisValues(), getDataSet());
+                chart.setData(data);
+                chart.invalidate();
+            }
+
+        });
+        */
     }
 
-
+    private class HandleClick implements RadioGroup.OnCheckedChangeListener {
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            Log.d("chk", "id" + checkedId);
+            RadarData data = new RadarData(getXAxisValues(), getDataSet());
+            radarChart.setData(data);
+            radarChart.invalidate();
+        }
+    }
     private ArrayList<RadarDataSet> getDataSet() {
         ArrayList<RadarDataSet> dataSets = null;
 
         ArrayList<Entry> valueSet1 = new ArrayList<>();
-        Entry v1e1 = new Entry(110.000f, 0); // Jan
-        valueSet1.add(v1e1);
+
+        rgSweet = (RadioGroup) findViewById(R.id.radioGroupSweet);
+        RadioButton button = (RadioButton) findViewById(rgSweet.getCheckedRadioButtonId());;
+        if( button != null) {
+            Entry v1e1 = new Entry(Integer.parseInt(button.getText().toString()), 0); // Sweet
+            valueSet1.add(v1e1);
+        }
+        rgSour =(RadioGroup) findViewById(R.id.radioGroupSour);
+        button = (RadioButton) findViewById(rgSour.getCheckedRadioButtonId());;
+        if( button != null) {
+            Entry v1e1 = new Entry(Integer.parseInt(button.getText().toString()), 1); // Sour
+            valueSet1.add(v1e1);
+        }
+
+        rgFloral =(RadioGroup) findViewById(R.id.radioGroupFloral);
+        button = (RadioButton) findViewById(rgFloral.getCheckedRadioButtonId());;
+        if( button != null) {
+            Entry v1e1 = new Entry(Integer.parseInt(button.getText().toString()), 1); // Sour
+            valueSet1.add(v1e1);
+        }
+
         /*BarEntry v1e2 = new BarEntry(40.000f, 1); // Feb
         valueSet1.add(v1e2);
         BarEntry v1e3 = new BarEntry(60.000f, 2); // Mar
@@ -95,6 +159,10 @@ public class NewCoffeeLog extends Activity implements OnClickListener  {
         BarDataSet barDataSet2 = new BarDataSet(valueSet2, "Brand 2");
         barDataSet2.setColors(ColorTemplate.COLORFUL_COLORS);
 */
+        radarDataSet1.setFillColor(Color.GREEN);
+        radarDataSet1.setHighLightColor(Color.RED);
+        radarDataSet1.setFillAlpha(100);
+        radarDataSet1.setDrawFilled(true);
         dataSets = new ArrayList<>();
         dataSets.add(radarDataSet1);
         //dataSets.add(barDataSet2);
@@ -121,6 +189,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener  {
         xAxis.add("FINISH");      //15
         return xAxis;
     }
+
     private void findViewsById() {
         brewTxt = (EditText) findViewById(R.id.editText4);
         brewTxt.setInputType(InputType.TYPE_NULL);
@@ -143,7 +212,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener  {
                 brewTxt.setText(dateFormatter.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         roastDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -153,7 +222,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener  {
                 roastTxt.setText(dateFormatter.format(newDate.getTime()));
             }
 
-        },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
     @Override
@@ -165,15 +234,10 @@ public class NewCoffeeLog extends Activity implements OnClickListener  {
 
     @Override
     public void onClick(View view) {
-        if(view == brewTxt) {
+        if (view == brewTxt) {
             brewDatePickerDialog.show();
-        } else if(view == roastTxt) {
+        } else if (view == roastTxt) {
             roastDatePickerDialog.show();
         }
     }
 }
-
-
-
-
-
