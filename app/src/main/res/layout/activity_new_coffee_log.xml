@@ -350,7 +350,10 @@
             android:text="Tasting Profile"
             android:id="@+id/textView"
             android:textAlignment="center" />
-
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="400dp" />
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
