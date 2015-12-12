@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     public void startNewCoffeeActivity(View view)
     {
         Intent intent = new Intent(this,NewCoffeeLog.class);
+        int id =0;
+        intent.putExtra("db_id",id);
         startActivity(intent);
     }
     public void startListCoffeeActivity(View view)

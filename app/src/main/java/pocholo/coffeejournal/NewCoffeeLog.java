@@ -45,30 +45,65 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     private DatePickerDialog roastDatePickerDialog;
     private  RadarChart radarChart;
     private SimpleDateFormat dateFormatter;
-
+    private ArrayList<RadioGroup> rgTasteProfileList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_coffee_log);
 
-        dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        // Load List with Radio Groups
+        rgTasteProfileList = new ArrayList<RadioGroup>();
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSweet));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSour));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupFloral));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSpicy));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSalty));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupBerry));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupCitrus));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupStoreFruit));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupChocolate));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupCaramel));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSmokey));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupBitter));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSavory));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupBody));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupClean));
+        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupFinish));
 
+        // For calendar stuff
+        dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
         findViewsById();
-
         setDateTimeField();
 
+        // Initialize Radar Chart
         radarChart = (RadarChart) findViewById(R.id.chart);
         if(radarChart != null){
             RadarData data = new RadarData(getXAxisValues(), getDataSet());
             radarChart.setData(data);
             radarChart.setDescription("TASTE PROFILE");
-            radarChart.getYAxis().setAxisMinValue(6);
-            radarChart.getYAxis().setAxisMaxValue(6);
+            radarChart.getYAxis().setAxisMinValue(1);
+            radarChart.getYAxis().setAxisMaxValue(5);
             radarChart.animateXY(2000, 2000);
             radarChart.setWebColor(Color.GRAY);
-            radarChart.setWebColorInner(Color.GREEN);
-            //radarChart.setBackgroundColor(Color.BLUE);
             radarChart.setDrawWeb(false);
+
+            // Set Background Color to Overall Rating
+            RadioGroup rgOverall = (RadioGroup) findViewById(R.id.radioGroupOverall);
+            rgOverall.setOnCheckedChangeListener(new HandleClickOverall());
+            RadioButton rbOverall = (RadioButton) findViewById(rgOverall.getCheckedRadioButtonId());
+            if(rbOverall == null){
+                radarChart.setBackgroundColor(Color.TRANSPARENT);
+            } else if( rbOverall.getText().equals("1") ){
+                radarChart.setBackgroundColor(Color.RED);
+            } else if( rbOverall.getText().equals("2") ){
+                radarChart.setBackgroundColor(Color.MAGENTA);
+            } else if( rbOverall.getText().equals("3") ){
+                radarChart.setBackgroundColor(Color.YELLOW);
+            } else if ( rbOverall.getText().equals("4") ) {
+                radarChart.setBackgroundColor(Color.GREEN);
+            } else if ( rbOverall.getText().equals("5") ){
+                radarChart.setBackgroundColor(Color.CYAN);
+            }
 
             // Hide Legends
             Legend legend = radarChart.getLegend();
@@ -77,12 +112,16 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         }
 
 
-
+        // Set On Check Listener to Array Profile List
+        for (RadioGroup rg : rgTasteProfileList) {
+            rg.setOnCheckedChangeListener(new HandleClick());
+        }
+        /*
         //rgSweet.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
         rgSweet.setOnCheckedChangeListener(new HandleClick());
         rgSour.setOnCheckedChangeListener(new HandleClick());
         rgFloral.setOnCheckedChangeListener(new HandleClick());
-        /*
+
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 Log.d("chk", "id" + checkedId);
@@ -95,6 +134,26 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         */
     }
 
+    private class HandleClickOverall implements RadioGroup.OnCheckedChangeListener {
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            Log.d("chk", "id" + checkedId);
+            RadioButton rb = (RadioButton) findViewById(checkedId);
+            if(rb == null){
+                radarChart.setBackgroundColor(Color.TRANSPARENT);
+            } else if( rb.getText().equals("1") ){
+                radarChart.setBackgroundColor(Color.RED);
+            } else if( rb.getText().equals("2") ){
+                radarChart.setBackgroundColor(Color.MAGENTA);
+            } else if( rb.getText().equals("3") ){
+                radarChart.setBackgroundColor(Color.YELLOW);
+            } else if ( rb.getText().equals("4") ) {
+                radarChart.setBackgroundColor(Color.GREEN);
+            } else if ( rb.getText().equals("5") ){
+                radarChart.setBackgroundColor(Color.CYAN);
+            }
+        }
+    }
+
     private class HandleClick implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             Log.d("chk", "id" + checkedId);
@@ -105,9 +164,18 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     }
     private ArrayList<RadarDataSet> getDataSet() {
         ArrayList<RadarDataSet> dataSets = null;
-
         ArrayList<Entry> valueSet1 = new ArrayList<>();
 
+        for(RadioGroup rg : rgTasteProfileList){
+            RadioButton button = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
+            float value = 0;
+            if( button != null) {
+                value = Integer.parseInt(button.getText().toString());
+            }
+            Entry v1e1 = new Entry(value, 0);
+            valueSet1.add(v1e1);
+        }
+        /*
         rgSweet = (RadioGroup) findViewById(R.id.radioGroupSweet);
         RadioButton button = (RadioButton) findViewById(rgSweet.getCheckedRadioButtonId());;
         if( button != null) {
@@ -127,7 +195,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             Entry v1e1 = new Entry(Integer.parseInt(button.getText().toString()), 1); // Sour
             valueSet1.add(v1e1);
         }
-
+*/
         /*BarEntry v1e2 = new BarEntry(40.000f, 1); // Feb
         valueSet1.add(v1e2);
         BarEntry v1e3 = new BarEntry(60.000f, 2); // Mar
@@ -239,5 +307,9 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         } else if (view == roastTxt) {
             roastDatePickerDialog.show();
         }
+    }
+
+    public void saveCoffeeLog(View view){
+        // DB Helper to save or create record
     }
 }
