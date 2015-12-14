@@ -51,14 +51,14 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/editTextRegion"
+                android:id="@+id/editTextCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:editable="true"
                 android:hint="Mexico City" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/editTextCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +125,7 @@
                     android:id="@+id/radioButtonDrip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="Drip" />
 
                 <RadioButton
@@ -174,12 +174,12 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText4"
+                    android:id="@+id/editTextRoastDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
                     android:ems="10"
-                    android:hint="1/1/15"
+                    android:hint="1/31/15"
                     android:inputType="date" />
 
                 <TextView
@@ -201,7 +201,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText5"
+                    android:id="@+id/editTextBrewDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
@@ -219,7 +219,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linarLayoutCoffeeGram"
+                android:id="@+id/linarLayoutCoffeeGrams"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout3"
@@ -227,7 +227,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/editTextCoffeeGrams"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
@@ -248,12 +248,12 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/linarLayoutCoffeeGram"
+                android:layout_below="@+id/linarLayoutCoffeeGrams"
                 android:layout_toRightOf="@+id/radioGroupBrewMethod"
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editText"
+                    android:id="@+id/editTextWaterGrams"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
@@ -299,7 +299,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -336,13 +336,16 @@
             </RadioGroup>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView"
+        <EditText
+            android:id="@+id/editTextNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tasting Profile"
-            android:textAlignment="center"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:minLines="4"
+            android:maxLines="10"
+            android:hint="HERE ARE MY NOTES"
+            android:scrollbars="vertical"/>
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart"
@@ -376,7 +379,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -439,7 +442,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -501,7 +504,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -563,7 +566,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -625,7 +628,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -687,7 +690,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -749,7 +752,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -811,7 +814,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -873,7 +876,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
@@ -930,13 +933,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonCaramel1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonCaramel2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -944,6 +949,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonCaramel3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -951,6 +957,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonCaramel4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -958,6 +965,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonCaramel5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -986,13 +994,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonSmokey1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSmokey2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1000,6 +1010,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSmokey3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1007,6 +1018,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSmokey4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1014,6 +1026,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSmokey5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1042,13 +1055,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonBitter1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBitter2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1056,6 +1071,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBitter3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1063,6 +1079,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBitter4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1070,6 +1087,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBitter5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1098,13 +1116,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonSavory1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSavory2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1112,6 +1132,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSavory3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1119,6 +1140,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSavory4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1126,6 +1148,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonSavory5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1154,13 +1177,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonBody1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBody2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1168,6 +1193,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBody3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1175,6 +1201,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBody4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1182,6 +1209,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonBody5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1210,13 +1238,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonClean1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonClean2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1224,6 +1254,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonClean3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1231,6 +1262,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonClean4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1238,6 +1270,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonClean5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1266,13 +1299,15 @@
                 android:orientation="horizontal">
 
                 <RadioButton
+                    android:id="@+id/radioButtonFinish1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:checked="false"
+                    android:checked="true"
                     android:text="1" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonFinish2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1280,6 +1315,7 @@
                     android:text="2" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonFinish3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1287,6 +1323,7 @@
                     android:text="3" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonFinish4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -1294,6 +1331,7 @@
                     android:text="4" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonFinish5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

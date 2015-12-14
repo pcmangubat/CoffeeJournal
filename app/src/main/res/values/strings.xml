@@ -1,3 +1,59 @@
 <resources>
     <string name="app_name">CoffeeJournal</string>
+
+    <string-array name="countries_array">
+        <item>Brazil</item>
+        <item>Vietnam</item>
+        <item>Colombia</item>
+        <item>Indonesia</item>
+        <item>Ethiopia</item>
+        <item>India</item>
+        <item>Mexico</item>
+        <item>Guatemala</item>
+        <item>Peru</item>
+        <item>Honduras</item>
+        <item>Uganda</item>
+        <item>Ivory Coast</item>
+        <item>Costa Rica</item>
+        <item>El Salvador</item>
+        <item>Nicaragua</item>
+        <item>Papua New Guinea</item>
+        <item>Ecuador</item>
+        <item>Thailand</item>
+        <item>Tanzania</item>
+        <item>Dominican Republic</item>
+        <item>Kenya</item>
+        <item>Venezuela</item>
+        <item>Cameroon</item>
+        <item>Philippines</item>
+        <item>Democratic Republic of the Congo</item>
+        <item>Burundi</item>
+        <item>Madagascar</item>
+        <item>Haiti</item>
+        <item>Rwanda</item>
+        <item>Guinea</item>
+        <item>Cuba</item>
+        <item>Togo</item>
+        <item>Bolivia</item>
+        <item>Zambia</item>
+        <item>Angola</item>
+        <item>Central African Republic</item>
+        <item>Panama</item>
+        <item>Zimbabwe</item>
+        <item>United States</item>
+        <item>Nigeria</item>
+        <item>Ghana</item>
+        <item>Jamaica</item>
+        <item>Sri Lanka</item>
+        <item>Malawi</item>
+        <item>Paraguay</item>
+        <item>Sierra Leone</item>
+        <item>Australia</item>
+        <item>Trinidad and Tobago</item>
+        <item>Nepal</item>
+        <item>Republic of the Congo</item>
+        <item>Equatorial Guinea</item>
+        <item>Gabon</item>
+        <item>Benin</item>
+    </string-array>
 </resources>
