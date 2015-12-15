@@ -1,12 +1,7 @@
 package pocholo.coffeejournal;
 
-import android.text.Editable;
-
 import java.util.Date;
 
-/**
- * Created by mr on 12/12/2015.
- */
 public class CoffeeLog {
     public long Id;
     public String Name;

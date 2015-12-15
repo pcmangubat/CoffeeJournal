@@ -13,14 +13,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose a Coffee Log" />
+        android:text="@string/select_coffee_log"/>
 
         <ListView
             android:id="@+id/listView1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" >
+            android:layout_height="match_parent">
         </ListView>
 
 </LinearLayout>

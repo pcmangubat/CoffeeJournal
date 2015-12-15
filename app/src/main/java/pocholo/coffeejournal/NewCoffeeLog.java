@@ -2,7 +2,6 @@ package pocholo.coffeejournal;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +12,6 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -26,18 +24,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 public class NewCoffeeLog extends Activity implements OnClickListener {
 
@@ -47,20 +41,33 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     private DatePickerDialog brewDatePickerDialog;
     private DatePickerDialog roastDatePickerDialog;
     private RadarChart radarChart;
-    private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);;
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
     private ArrayList<RadioGroup> rgTasteProfileList;
-    private DBCoffeeLogHelper mydb ;
+    private DBCoffeeLogHelper mydb;
+    private long db_id = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_coffee_log);
 
+        // set id if 0 then new record, > 0 means record from database and just update
+        db_id = 0;
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            db_id = bundle.getLong(DBCoffeeLogHelper.COFFEELOG_COLUMN_ID);
+        }
+        if (db_id > 0){
+            ((TextView)findViewById(R.id.textNewCoffeeLogTitle)).setText(R.string.coffee_title_update);
+        } else {
+            ((TextView)findViewById(R.id.textNewCoffeeLogTitle)).setText(R.string.coffee_title_new);
+        }
+
         // Create DB Helper
         mydb = new DBCoffeeLogHelper(this);
 
         // Load List with Radio Groups
-        rgTasteProfileList = new ArrayList<RadioGroup>();
+        rgTasteProfileList = new ArrayList<>();
         rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSweet));
         rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSour));
         rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupFloral));
@@ -83,19 +90,16 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         findViewsById();
         setDateTimeField();
 
-        // stop on click listners
+        // stop on click listeners
         stopOnClickListeners();
 
-        // Set Fields if loaded from list
-        Bundle extras = getIntent().getExtras();
-        if(extras !=null) {
-            long value = extras.getLong(DBCoffeeLogHelper.COFFEELOG_COLUMN_ID);
-            if(value >0){
-                // Update all fields
-                CoffeeLog coffeeLog = mydb.getCoffeeLog(value);
-                UpdateCoffeeLogView(coffeeLog);
-            }
+
+        if (db_id > 0) {
+            // Update all fields
+            CoffeeLog coffeeLog = mydb.getCoffeeLog(db_id);
+            UpdateCoffeeLogView(coffeeLog);
         }
+
 
         // Initialize Radar Chart
         radarChart = (RadarChart) findViewById(R.id.chart);
@@ -138,13 +142,13 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             String[] countries = getResources().getStringArray(R.array.countries_array);
             // Create the adapter and set it to the AutoCompleteTextView
             ArrayAdapter<String> adapter =
-                    new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries);
+                    new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, countries);
             textView.setAdapter(adapter);
         }
         startOnClickListeners();
     }
 
-    private void startOnClickListeners(){
+    private void startOnClickListeners() {
         // Set On Check Listener to Array Profile List
         for (RadioGroup rg : rgTasteProfileList) {
             rg.setOnCheckedChangeListener(new HandleClick());
@@ -153,7 +157,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         rgOverall.setOnCheckedChangeListener(new HandleClickOverall());
     }
 
-    private void stopOnClickListeners(){
+    private void stopOnClickListeners() {
         // Set On Check Listener to Array Profile List
         for (RadioGroup rg : rgTasteProfileList) {
             rg.setOnCheckedChangeListener(null);
@@ -161,38 +165,41 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         RadioGroup rgOverall = (RadioGroup) findViewById(R.id.radioGroupOverall);
         rgOverall.setOnCheckedChangeListener(null);
     }
-    private  void UpdateCoffeeLogView(CoffeeLog coffeeLog){
-        ((EditText)findViewById(R.id.editTextName)).setText(coffeeLog.Name);
-        ((EditText)findViewById(R.id.editTextRoaster)).setText(coffeeLog.Roaster);
-        ((EditText)findViewById(R.id.editTextCity)).setText(coffeeLog.City);
-        ((AutoCompleteTextView)findViewById(R.id.editTextCountry)).setText(coffeeLog.Country);
-        ((EditText)findViewById(R.id.editTextRoastDate)).setText(dateFormatter.format(coffeeLog.RoastDate.getTime()));
-        ((EditText)findViewById(R.id.editTextBrewDate)).setText(dateFormatter.format(coffeeLog.BrewDate.getTime()));
-        ((EditText)findViewById(R.id.editTextCoffeeGrams)).setText(String.valueOf(coffeeLog.CoffeeGrams));
-        ((EditText)findViewById(R.id.editTextWaterGrams)).setText(String.valueOf(coffeeLog.WaterGrams));
-        ((EditText)findViewById(R.id.editTextNotes)).setText(coffeeLog.Notes);
+
+    private void UpdateCoffeeLogView(CoffeeLog coffeeLog) {
+        ((EditText) findViewById(R.id.editTextName)).setText(coffeeLog.Name);
+        ((EditText) findViewById(R.id.editTextRoaster)).setText(coffeeLog.Roaster);
+        ((EditText) findViewById(R.id.editTextCity)).setText(coffeeLog.City);
+        ((AutoCompleteTextView) findViewById(R.id.editTextCountry)).setText(coffeeLog.Country);
+        ((EditText) findViewById(R.id.editTextRoastDate)).setText(dateFormatter.format(coffeeLog.RoastDate.getTime()));
+        ((EditText) findViewById(R.id.editTextBrewDate)).setText(dateFormatter.format(coffeeLog.BrewDate.getTime()));
+        ((EditText) findViewById(R.id.editTextCoffeeGrams)).setText(String.valueOf(coffeeLog.CoffeeGrams));
+        ((EditText) findViewById(R.id.editTextWaterGrams)).setText(String.valueOf(coffeeLog.WaterGrams));
+        ((EditText) findViewById(R.id.editTextNotes)).setText(coffeeLog.Notes);
 
 
         setRadioGroupCheck(R.id.radioGroupBrewMethod, coffeeLog.BrewMethod);
         setRadioGroupCheck(R.id.radioGroupOverall, coffeeLog.Overall);
-       for(int i = 0; i < rgTasteProfileList.size(); i++){
-           RadioGroup radioGroup = rgTasteProfileList.get(i);
-           if(i < coffeeLog.TasteProfile.length()){
-               setRadioGroupCheck(radioGroup.getId(),Character.getNumericValue(coffeeLog.TasteProfile.charAt(i)));
-           }
-       }
+        for (int i = 0; i < rgTasteProfileList.size(); i++) {
+            RadioGroup radioGroup = rgTasteProfileList.get(i);
+            if (i < coffeeLog.TasteProfile.length()) {
+                setRadioGroupCheck(radioGroup.getId(), Character.getNumericValue(coffeeLog.TasteProfile.charAt(i)));
+            }
+        }
     }
-    private void setRadioGroupCheck(int id, int text){
+
+    private void setRadioGroupCheck(int id, int text) {
         setRadioGroupCheck(id, String.valueOf(text));
     }
-    private void setRadioGroupCheck(int id, String text){
-        RadioGroup radioGroup = (RadioGroup)findViewById(id);
-        if(radioGroup != null){
-            for(int i = 0; i < radioGroup.getChildCount(); i++){
+
+    private void setRadioGroupCheck(int id, String text) {
+        RadioGroup radioGroup = (RadioGroup) findViewById(id);
+        if (radioGroup != null) {
+            for (int i = 0; i < radioGroup.getChildCount(); i++) {
                 View o = radioGroup.getChildAt(i);
-                if(o instanceof RadioButton){
-                    RadioButton radioButton = (RadioButton)radioGroup.getChildAt(i);
-                    if(radioButton.getText().toString().equals(text)){
+                if (o instanceof RadioButton) {
+                    RadioButton radioButton = (RadioButton) radioGroup.getChildAt(i);
+                    if (radioButton.getText().toString().equals(text)) {
                         radioGroup.check(radioButton.getId());
                         break;
                     }
@@ -200,6 +207,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             }
         }
     }
+
     private class HandleClickOverall implements RadioGroup.OnCheckedChangeListener {
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             Log.d("chk", "id" + checkedId);
@@ -230,7 +238,6 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     }
 
     private ArrayList<RadarDataSet> getDataSet() {
-        ArrayList<RadarDataSet> dataSets = null;
         ArrayList<Entry> valueSet1 = new ArrayList<>();
 
         for (RadioGroup rg : rgTasteProfileList) {
@@ -250,7 +257,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         radarDataSet1.setHighLightColor(Color.RED);
         radarDataSet1.setFillAlpha(100);
         radarDataSet1.setDrawFilled(true);
-        dataSets = new ArrayList<>();
+        ArrayList<RadarDataSet> dataSets = new ArrayList<>();
         dataSets.add(radarDataSet1);
 
         return dataSets;
@@ -327,28 +334,29 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             roastDatePickerDialog.show();
         }
     }
-    private CoffeeLog getCoffeeLogDetails(int id){
+
+    private CoffeeLog getCoffeeLogDetails(Long id) {
         CoffeeLog coffeeLog = new CoffeeLog();
-        coffeeLog.Id =id;
-        coffeeLog.Name = ((EditText)findViewById(R.id.editTextName)).getText().toString();
-        coffeeLog.Roaster = ((EditText)findViewById(R.id.editTextRoaster)).getText().toString();
-        coffeeLog.City = ((EditText)findViewById(R.id.editTextCity)).getText().toString();
-        coffeeLog.Country = ((AutoCompleteTextView)findViewById(R.id.editTextCountry)).getText().toString();
-        String dateStr = ((EditText)findViewById(R.id.editTextRoastDate)).getText().toString();
+        coffeeLog.Id = id;
+        coffeeLog.Name = ((EditText) findViewById(R.id.editTextName)).getText().toString();
+        coffeeLog.Roaster = ((EditText) findViewById(R.id.editTextRoaster)).getText().toString();
+        coffeeLog.City = ((EditText) findViewById(R.id.editTextCity)).getText().toString();
+        coffeeLog.Country = ((AutoCompleteTextView) findViewById(R.id.editTextCountry)).getText().toString();
+        String dateStr = ((EditText) findViewById(R.id.editTextRoastDate)).getText().toString();
 
         //SimpleDateFormat curFormater = new SimpleDateFormat("MM/dd/yyyy",Locale.US);
         Date date = new Date();
         try {
             date = dateFormatter.parse(dateStr);
-        } catch (ParseException e ) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         coffeeLog.RoastDate = date;
 
-        dateStr = ((EditText)findViewById(R.id.editTextBrewDate)).getText().toString();
+        dateStr = ((EditText) findViewById(R.id.editTextBrewDate)).getText().toString();
         try {
             date = dateFormatter.parse(dateStr);
-        } catch (ParseException e ) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
         coffeeLog.BrewDate = date;
@@ -360,7 +368,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         String gramsStr = ((EditText) findViewById(R.id.editTextCoffeeGrams)).getText().toString();
         try {
             grams = Double.parseDouble(gramsStr);
-        } catch (NumberFormatException e ) {
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         coffeeLog.CoffeeGrams = grams;
@@ -369,7 +377,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         gramsStr = ((EditText) findViewById(R.id.editTextWaterGrams)).getText().toString();
         try {
             grams = Double.parseDouble(gramsStr);
-        } catch (NumberFormatException e ) {
+        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         coffeeLog.WaterGrams = grams;
@@ -377,42 +385,41 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         buttonId = ((RadioGroup) findViewById(R.id.radioGroupOverall)).getCheckedRadioButtonId();
         coffeeLog.Overall = Integer.parseInt(((RadioButton) findViewById(buttonId)).getText().toString());
 
-        coffeeLog.Notes = ((EditText)findViewById(R.id.editTextNotes)).getText().toString();
+        coffeeLog.Notes = ((EditText) findViewById(R.id.editTextNotes)).getText().toString();
 
         String tasteProfileStr = "";
-        for( int i =0; i < rgTasteProfileList.size(); i++){
+        for (int i = 0; i < rgTasteProfileList.size(); i++) {
             RadioGroup radioGroup = rgTasteProfileList.get(i);
             RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
             tasteProfileStr = tasteProfileStr + radioButton.getText().toString();
         }
         coffeeLog.TasteProfile = tasteProfileStr;
-        return  coffeeLog;
+        return coffeeLog;
+    }
+
+    public void cancelCoffeeLog(View view) {
+        Toast.makeText(getApplicationContext(), "cancel", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
     }
 
     public void saveCoffeeLog(View view) {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            int Value = extras.getInt(DBCoffeeLogHelper.COFFEELOG_COLUMN_ID);
-
-            if (Value > 0) {
-                /*
-                if (mydb.updateContact(id_To_Update, name.getText().toString(), phone.getText().toString(), email.getText().toString(), street.getText().toString(), place.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "not Updated", Toast.LENGTH_SHORT).show();
-                }
-*/
-            } else {
-                if (mydb.insertCoffeeLog(getCoffeeLogDetails(Value)) > 0) {
-                    Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "not done", Toast.LENGTH_SHORT).show();
-                }
+        if (db_id > 0) {
+            if (mydb.updateCoffeeLog(db_id, getCoffeeLogDetails(db_id)) > 0) {
+                Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+            } else {
+                Toast.makeText(getApplicationContext(), "not Updated", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            if (mydb.insertCoffeeLog(getCoffeeLogDetails(db_id)) > 0) {
+                Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "not done", Toast.LENGTH_SHORT).show();
+            }
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         }
     }
 }

@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">CoffeeJournal</string>
-
+    <string name="coffee_title_new">New Coffee Log</string>
+    <string name="coffee_title_update">Update Coffee Log</string>
+    <string name="select_coffee_log">Select Coffee Log to view</string>
+    <string name="id_header">ID:</string>
+    <string name="name_header">Name:</string>
+    <string name="roaster_header">Roaster:</string>
+    <string name="country_header">Country:</string>
+    <string name="textview">TextView</string>
+    <string name="create_new_coffee_log">Create New Coffee Log</string>
     <string-array name="countries_array">
         <item>Brazil</item>
         <item>Vietnam</item>

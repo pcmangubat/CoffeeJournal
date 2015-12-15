@@ -1,15 +1,13 @@
 package pocholo.coffeejournal;
 
-import  java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-        import java.util.Hashtable;
-        import android.content.ContentValues;
-        import android.content.Context;
-        import android.database.Cursor;
-        import android.database.DatabaseUtils;
-        import android.database.sqlite.SQLiteOpenHelper;
-        import android.database.sqlite.SQLiteDatabase;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteDatabase;
 
 public class DBCoffeeLogHelper extends SQLiteOpenHelper {
 
@@ -28,10 +26,8 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
     public static final String COFFEELOG_COLUMN_OVERALL = "overall";
     public static final String COFFEELOG_COLUMN_TASTEPROFILE = "tasteprofile";
     public static final String COFFEELOG_COLUMN_NOTES = "notes";
-    private HashMap hp;
 
-    public DBCoffeeLogHelper(Context context)
-    {
+    public DBCoffeeLogHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -58,12 +54,11 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + COFFEELOG_TABLE_NAME );
+        db.execSQL("DROP TABLE IF EXISTS " + COFFEELOG_TABLE_NAME);
         onCreate(db);
     }
 
-    public long insertCoffeeLog  (CoffeeLog coffeeLog)
-    {
+    public long insertCoffeeLog(CoffeeLog coffeeLog) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COFFEELOG_COLUMN_NAME, coffeeLog.Name);
@@ -82,11 +77,11 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
         return db.insert(COFFEELOG_TABLE_NAME, null, contentValues);
     }
 
-    public CoffeeLog getCoffeeLog(long id){
+    public CoffeeLog getCoffeeLog(long id) {
         CoffeeLog coffeeLog = new CoffeeLog();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("select * from " + COFFEELOG_TABLE_NAME + " where " + COFFEELOG_COLUMN_ID + "=" + id + "", null);
-        if(res != null) {
+        Cursor res = db.rawQuery("select * from " + COFFEELOG_TABLE_NAME + " where " + COFFEELOG_COLUMN_ID + "=" + id + "", null);
+        if (res != null) {
             res.moveToFirst();
             coffeeLog.Id = res.getLong(res.getColumnIndex(COFFEELOG_COLUMN_ID));
             coffeeLog.Name = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_NAME));
@@ -101,22 +96,20 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
             coffeeLog.Overall = res.getInt(res.getColumnIndex(COFFEELOG_COLUMN_OVERALL));
             coffeeLog.TasteProfile = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_TASTEPROFILE));
             coffeeLog.Notes = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_NOTES));
-            if (!res.isClosed()){
+            if (!res.isClosed()) {
                 res.close();
             }
         }
         return coffeeLog;
     }
 
-    public int numberOfRows(){
+    public int numberOfRows() {
         SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, COFFEELOG_TABLE_NAME);
-        return numRows;
+        return (int) DatabaseUtils.queryNumEntries(db, COFFEELOG_TABLE_NAME);
     }
 
 
-    public boolean updateCoffeeLog (Integer id, CoffeeLog coffeeLog)
-    {
+    public int updateCoffeeLog(Long id, CoffeeLog coffeeLog) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -133,28 +126,25 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
         contentValues.put(COFFEELOG_COLUMN_TASTEPROFILE, coffeeLog.TasteProfile);
         contentValues.put(COFFEELOG_COLUMN_NOTES, coffeeLog.Notes);
 
-        db.update(COFFEELOG_TABLE_NAME, contentValues, COFFEELOG_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) } );
-        return true;
+        return db.update(COFFEELOG_TABLE_NAME, contentValues, COFFEELOG_COLUMN_ID + " = ? ", new String[]{Long.toString(id)});
     }
 
-    public Integer deleteCoffeeLog (Long id)
-    {
+    public Integer deleteCoffeeLog(Long id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(COFFEELOG_TABLE_NAME,
                 COFFEELOG_COLUMN_ID + " = ? ",
-                new String[] { Long.toString(id) });
+                new String[]{Long.toString(id)});
     }
 
-    public CoffeeLog[] getCoffeeLogs()
-    {
-        ArrayList<CoffeeLog> array_list = new ArrayList<CoffeeLog>();
+    public CoffeeLog[] getCoffeeLogs() {
+        ArrayList<CoffeeLog> array_list = new ArrayList<>();
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from " + COFFEELOG_TABLE_NAME, null );
+        Cursor res = db.rawQuery("select * from " + COFFEELOG_TABLE_NAME, null);
         res.moveToFirst();
 
-        while(res.isAfterLast() == false){
+        while (!res.isAfterLast()) {
             CoffeeLog coffeeLog = new CoffeeLog();
             coffeeLog.Id = res.getInt(res.getColumnIndex(COFFEELOG_COLUMN_ID));
             coffeeLog.Name = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_NAME));
@@ -180,9 +170,9 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
         return dbCoffeeLogs;
     }
 
-    public  Cursor getCoffeeLogsCursor(){
+    public Cursor getCoffeeLogsCursor() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "select * from " + COFFEELOG_TABLE_NAME, null );
+        Cursor res = db.rawQuery("select * from " + COFFEELOG_TABLE_NAME, null);
         if (res != null) {
             res.moveToFirst();
         }
