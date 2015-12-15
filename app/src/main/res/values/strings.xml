@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoffeeJournal</string>
+    <string name="app_name">Coffee Journal</string>
     <string name="coffee_title_new">New Coffee Log</string>
     <string name="coffee_title_update">Update Coffee Log</string>
     <string name="select_coffee_log">Select Coffee Log to view</string>
