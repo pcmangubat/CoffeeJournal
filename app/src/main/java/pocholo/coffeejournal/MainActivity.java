@@ -3,7 +3,6 @@ package pocholo.coffeejournal;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         mydb = new DBCoffeeLogHelper(this);
         ArrayList<CoffeeLog> coffeeLogs = new ArrayList<>(Arrays.asList(mydb.getCoffeeLogs()));
-        CoffeeLogAdapter dataAdapter = new CoffeeLogAdapter(this,coffeeLogs);
+        CoffeeLogAdapter dataAdapter = new CoffeeLogAdapter(this, coffeeLogs);
         ListView listView = (ListView) findViewById(R.id.listView1);
         // Assign adapter to ListView
         listView.setAdapter(dataAdapter);
@@ -66,9 +65,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
-                Cursor cursor = (Cursor) arg0.getItemAtPosition(pos);
+                CoffeeLog coffeeLog = (CoffeeLog) arg0.getItemAtPosition(pos);
 
-                final long id_To_Search = cursor.getLong(cursor.getColumnIndexOrThrow(DBCoffeeLogHelper.COFFEELOG_COLUMN_ID));
+                final long id_To_Search = coffeeLog.Id;
 //                    Log.v("long clicked","pos"+" "+pos);
                 alert.setTitle("Confirm Delete");
                 // set dialog message

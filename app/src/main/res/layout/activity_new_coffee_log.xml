@@ -7,13 +7,12 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:scrollIndicators="right"
         android:weightSum="1"
         tools:context="pocholo.coffeejournal.NewCoffeeLog">
 
@@ -21,29 +20,20 @@
             android:id="@+id/textNewCoffeeLogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Coffee Log"
+            android:text="@string/new_coffee_log"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:editable="true"
-            android:hint="Breakfast Coffee" />
+            android:hint="@string/breakfast_coffee" />
 
         <EditText
             android:id="@+id/editTextRoaster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:editable="true"
-            android:hint="Starbucks" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-        </LinearLayout>
+            android:hint="@string/starbucks" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,16 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:editable="true"
-                android:hint="Mexico City" />
+                android:hint="@string/mexico_city" />
 
             <AutoCompleteTextView
                 android:id="@+id/editTextCountry"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:editable="true"
-                android:hint="Mexico" />
+                android:hint="@string/mexico" />
         </LinearLayout>
 
         <LinearLayout
@@ -78,26 +66,25 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_margin="0dp"
                 android:layout_marginTop="0dp"
                 android:layout_weight="1"
-                android:gravity="top|right"
+                android:gravity="top|end"
                 android:paddingEnd="0dp"
                 android:paddingStart="0dp"
-                android:text="City/Region"
-                android:textAlignment="center"
+                android:text="@string/city_region"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:gravity="right|top"
+                android:gravity="end|top"
                 android:padding="0dp"
-                android:text="Country"
-                android:textAlignment="center"
+                android:text="@string/country"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
 
@@ -111,14 +98,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:longClickable="false"
-                android:nestedScrollingEnabled="false"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textViewBrewMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Brew Method"
+                    android:text="@string/brew_method"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <RadioButton
@@ -126,43 +112,43 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="Drip" />
+                    android:text="@string/drip" />
 
                 <RadioButton
                     android:id="@+id/radioButtonEspresso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|left"
+                    android:layout_gravity="center_horizontal|start"
                     android:checked="false"
-                    android:text="Espresso" />
+                    android:text="@string/espresso" />
 
                 <RadioButton
                     android:id="@+id/radioButtonPourOver"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Pour Over" />
+                    android:text="@string/pour_over" />
 
                 <RadioButton
                     android:id="@+id/radioButtonPress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Press" />
+                    android:text="@string/press" />
 
                 <RadioButton
                     android:id="@+id/radioButtonAeropress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Aeropress" />
+                    android:text="@string/aeropress" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSiphon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="Siphon" />
+                    android:text="@string/siphon" />
 
             </RadioGroup>
 
@@ -170,6 +156,7 @@
                 android:id="@+id/linearLayout2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/radioGroupBrewMethod"
                 android:layout_toRightOf="@+id/radioGroupBrewMethod"
                 android:orientation="horizontal">
 
@@ -179,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
                     android:ems="10"
-                    android:hint="1/31/15"
+                    android:hint="@string/date_example1"
                     android:inputType="date" />
 
                 <TextView
@@ -187,7 +174,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Roast Date"
+                    android:text="@string/roast_date"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
             </LinearLayout>
@@ -197,6 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout2"
+                android:layout_toEndOf="@id/radioGroupBrewMethod"
                 android:layout_toRightOf="@id/radioGroupBrewMethod"
                 android:orientation="horizontal">
 
@@ -206,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
                     android:ems="10"
-                    android:hint="1/1/15"
+                    android:hint="@string/date_example2"
                     android:inputType="date" />
 
                 <TextView
@@ -214,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Brew Date"
+                    android:text="@string/brew_date"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -223,6 +211,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linearLayout3"
+                android:layout_toEndOf="@+id/radioGroupBrewMethod"
                 android:layout_toRightOf="@+id/radioGroupBrewMethod"
                 android:orientation="horizontal">
 
@@ -232,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
                     android:ems="10"
-                    android:hint="4.5"
+                    android:hint="@string/hint_coffee_grams"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -240,7 +229,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Coffee Grams"
+                    android:text="@string/coffee_grams"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -249,6 +238,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linarLayoutCoffeeGrams"
+                android:layout_toEndOf="@+id/radioGroupBrewMethod"
                 android:layout_toRightOf="@+id/radioGroupBrewMethod"
                 android:orientation="horizontal">
 
@@ -258,7 +248,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="100"
                     android:ems="10"
-                    android:hint="4.5"
+                    android:hint="@string/hint_water_grams"
                     android:inputType="numberDecimal" />
 
                 <TextView
@@ -266,7 +256,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
-                    android:text="Water Grams"
+                    android:text="@string/water_grams"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -281,10 +271,10 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Overall"
-                android:textAlignment="center"
+                android:text="@string/overall"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <RadioGroup
@@ -300,7 +290,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButton7"
@@ -308,7 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButton8"
@@ -316,7 +306,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButton9"
@@ -324,7 +314,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButton10"
@@ -332,7 +322,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
 
@@ -340,12 +330,12 @@
             android:id="@+id/editTextNotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/notes_example"
             android:inputType="textMultiLine"
             android:lines="4"
-            android:minLines="4"
             android:maxLines="10"
-            android:hint="HERE ARE MY NOTES"
-            android:scrollbars="vertical"/>
+            android:minLines="4"
+            android:scrollbars="vertical" />
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart"
@@ -361,10 +351,10 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Sweet"
-                android:textAlignment="center"
+                android:text="@string/sweet"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <RadioGroup
@@ -380,7 +370,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButton2"
@@ -388,7 +378,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButton3"
@@ -396,7 +386,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButton4"
@@ -404,7 +394,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButton5"
@@ -412,7 +402,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
 
@@ -425,11 +415,12 @@
                 android:id="@+id/textViewSour"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Sour"
-                android:textAlignment="center"
+                android:text="@string/sour"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupSour"
                 android:layout_width="wrap_content"
@@ -443,7 +434,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSour2"
@@ -451,7 +442,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSour3"
@@ -459,7 +450,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSour4"
@@ -467,7 +458,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSour5"
@@ -475,9 +466,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -487,11 +479,12 @@
                 android:id="@+id/textViewFloral"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Floral"
-                android:textAlignment="center"
+                android:text="@string/floral"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupFloral"
                 android:layout_width="wrap_content"
@@ -505,7 +498,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFloral2"
@@ -513,7 +506,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFloral3"
@@ -521,7 +514,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFloral4"
@@ -529,7 +522,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFloral5"
@@ -537,9 +530,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -549,11 +543,12 @@
                 android:id="@+id/textViewSpicy"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Spicy"
-                android:textAlignment="center"
+                android:text="@string/spicy"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupSpicy"
                 android:layout_width="wrap_content"
@@ -567,7 +562,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSpicy2"
@@ -575,7 +570,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSpicy3"
@@ -583,7 +578,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSpicy4"
@@ -591,7 +586,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSpicy5"
@@ -599,9 +594,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -611,11 +607,12 @@
                 android:id="@+id/textViewSalty"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Salty"
-                android:textAlignment="center"
+                android:text="@string/salty"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupSalty"
                 android:layout_width="wrap_content"
@@ -629,7 +626,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSalty2"
@@ -637,7 +634,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSalty3"
@@ -645,7 +642,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSalty4"
@@ -653,7 +650,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSalty5"
@@ -661,9 +658,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -675,9 +673,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Berry"
-                android:textAlignment="center"
+                android:text="@string/berry"
+
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupBerry"
                 android:layout_width="wrap_content"
@@ -691,7 +690,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBerry2"
@@ -699,7 +698,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBerry3"
@@ -707,7 +706,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBerry4"
@@ -715,7 +714,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBerry5"
@@ -723,9 +722,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -737,9 +737,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Citrus"
-                android:textAlignment="center"
+                android:text="@string/citrus"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupCitrus"
                 android:layout_width="wrap_content"
@@ -753,7 +753,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCitrus2"
@@ -761,7 +761,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCitrus3"
@@ -769,7 +769,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCitrus4"
@@ -777,7 +777,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCitrus5"
@@ -785,9 +785,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -799,9 +800,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="StoreFruit"
-                android:textAlignment="center"
+                android:text="@string/store_fruit"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupStoreFruit"
                 android:layout_width="wrap_content"
@@ -815,7 +816,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonStoreFruit2"
@@ -823,7 +824,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonStoreFruit3"
@@ -831,7 +832,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonStoreFruit4"
@@ -839,7 +840,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonStoreFruit5"
@@ -847,9 +848,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -861,9 +863,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Chocolate"
-                android:textAlignment="center"
+                android:text="@string/chocolate"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupChocolate"
                 android:layout_width="wrap_content"
@@ -877,7 +879,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonChocolate2"
@@ -885,7 +887,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonChocolate3"
@@ -893,7 +895,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonChocolate4"
@@ -901,7 +903,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonChocolate5"
@@ -909,9 +911,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -922,9 +925,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Caramel"
-                android:textAlignment="center"
+                android:text="@string/caramel"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupCaramel"
                 android:layout_width="wrap_content"
@@ -938,7 +941,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCaramel2"
@@ -946,7 +949,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCaramel3"
@@ -954,7 +957,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCaramel4"
@@ -962,7 +965,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonCaramel5"
@@ -970,9 +973,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -983,9 +987,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Smokey"
-                android:textAlignment="center"
+                android:text="@string/smokey"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupSmokey"
                 android:layout_width="wrap_content"
@@ -999,7 +1003,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSmokey2"
@@ -1007,7 +1011,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSmokey3"
@@ -1015,7 +1019,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSmokey4"
@@ -1023,7 +1027,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSmokey5"
@@ -1031,9 +1035,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1044,9 +1049,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Bitter"
-                android:textAlignment="center"
+                android:text="@string/bitter"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupBitter"
                 android:layout_width="wrap_content"
@@ -1060,7 +1065,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBitter2"
@@ -1068,7 +1073,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBitter3"
@@ -1076,7 +1081,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBitter4"
@@ -1084,7 +1089,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBitter5"
@@ -1092,9 +1097,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1105,9 +1111,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Savory"
-                android:textAlignment="center"
+                android:text="@string/savory"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupSavory"
                 android:layout_width="wrap_content"
@@ -1121,7 +1127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSavory2"
@@ -1129,7 +1135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSavory3"
@@ -1137,7 +1143,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSavory4"
@@ -1145,7 +1151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSavory5"
@@ -1153,9 +1159,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1166,9 +1173,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Body"
-                android:textAlignment="center"
+                android:text="@string/body"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupBody"
                 android:layout_width="wrap_content"
@@ -1182,7 +1189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBody2"
@@ -1190,7 +1197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBody3"
@@ -1198,7 +1205,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBody4"
@@ -1206,7 +1213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonBody5"
@@ -1214,9 +1221,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1227,9 +1235,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Clean"
-                android:textAlignment="center"
+                android:text="@string/clean"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupClean"
                 android:layout_width="wrap_content"
@@ -1243,7 +1251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonClean2"
@@ -1251,7 +1259,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonClean3"
@@ -1259,7 +1267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonClean4"
@@ -1267,7 +1275,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonClean5"
@@ -1275,9 +1283,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -1288,9 +1297,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Finish"
-                android:textAlignment="center"
+                android:text="@string/finish"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
+
             <RadioGroup
                 android:id="@+id/radioGroupFinish"
                 android:layout_width="wrap_content"
@@ -1304,7 +1313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="1" />
+                    android:text="@string/one" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFinish2"
@@ -1312,7 +1321,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="2" />
+                    android:text="@string/two" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFinish3"
@@ -1320,7 +1329,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="3" />
+                    android:text="@string/three" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFinish4"
@@ -1328,7 +1337,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="4" />
+                    android:text="@string/four" />
 
                 <RadioButton
                     android:id="@+id/radioButtonFinish5"
@@ -1336,30 +1345,32 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="false"
-                    android:text="5" />
+                    android:text="@string/five" />
             </RadioGroup>
         </LinearLayout>
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content">
 
-         <Button
-             android:id="@+id/buttonSave"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_weight="1"
-             android:text="Save"
-             android:onClick="saveCoffeeLog"
-             />
-         <Button
-             android:id="@+id/buttonCancel"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_weight="1"
-             android:text="Cancel"
-             android:onClick="cancelCoffeeLog"
-             />
-     </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonSave"
+                style="@style/Base.AlertDialog.AppCompat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="saveCoffeeLog"
+                android:text="@string/save" />
+
+            <Button
+                android:id="@+id/buttonCancel"
+                style="@style/Base.AlertDialog.AppCompat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="cancelCoffeeLog"
+                android:text="@string/cancel" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

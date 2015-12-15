@@ -3,10 +3,10 @@
     <item
         android:id="@+id/Edit_Contact"
         android:orderInCategory="100"
-        android:title="Edit"/>
+        android:title="Edit" />
 
     <item
         android:id="@+id/Delete_Contact"
         android:orderInCategory="100"
-        android:title="Delete"/>
+        android:title="Delete" />
 </menu>
