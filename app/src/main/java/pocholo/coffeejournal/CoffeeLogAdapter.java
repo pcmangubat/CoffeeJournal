@@ -44,17 +44,17 @@ public class CoffeeLogAdapter extends ArrayAdapter<CoffeeLog> {
             xAxis.add("SWEET");       //0
             xAxis.add("");        //1
             xAxis.add("FLORAL");      //2
-            xAxis.add("");       //3
+            xAxis.add("SPICY");       //3
             xAxis.add("SALTY");       //4
-            xAxis.add("");       //5
+            xAxis.add("BERRY");       //5
             xAxis.add("CITRUS");      //6
             xAxis.add(""); //7
             xAxis.add("CHOCOLATE");   //8
             xAxis.add("");     //9
             xAxis.add("SMOKEY");      //10
-            xAxis.add("");      //11
+            xAxis.add("BITTER");      //11
             xAxis.add("SAVORY");      //12
-            xAxis.add("");        //13
+            xAxis.add("BODY");        //13
             xAxis.add("CLEAN");       //14
             xAxis.add("");      //15
 
