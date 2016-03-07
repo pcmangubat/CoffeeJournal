@@ -5,6 +5,7 @@
     android:fillViewport="false">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/details_layout"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,6 +16,10 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:weightSum="1"
         tools:context="pocholo.coffeejournal.NewCoffeeLog">
+
+        <include layout="@layout/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/textNewCoffeeLogTitle"
@@ -27,12 +32,14 @@
             android:id="@+id/editTextName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/state"
             android:hint="@string/breakfast_coffee" />
 
         <EditText
             android:id="@+id/editTextRoaster"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/state"
             android:hint="@string/starbucks" />
 
         <LinearLayout
@@ -45,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/state"
                 android:hint="@string/mexico_city" />
 
             <AutoCompleteTextView
@@ -52,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/state"
                 android:hint="@string/mexico" />
         </LinearLayout>
 
@@ -60,6 +69,7 @@
             android:layout_height="match_parent"
             android:layout_margin="0dp"
             android:layout_marginTop="0dp"
+            android:background="@drawable/state"
             android:orientation="horizontal">
 
             <TextView
@@ -342,196 +352,12 @@
             android:layout_width="match_parent"
             android:layout_height="400dp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/sweet"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <RadioGroup
-                android:id="@+id/radioGroupSweet"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/one" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/two" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/three" />
-
-                <RadioButton
-                    android:id="@+id/radioButton4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/four" />
-
-                <RadioButton
-                    android:id="@+id/radioButton5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/five" />
-            </RadioGroup>
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewSour"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/sour"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <RadioGroup
-                android:id="@+id/radioGroupSour"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioButtonSour1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/one" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonSour2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/two" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonSour3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/three" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonSour4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/four" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonSour5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/five" />
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/textViewFloral"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/floral"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
-
-            <RadioGroup
-                android:id="@+id/radioGroupFloral"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/radioButtonFloral1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:text="@string/one" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonFloral2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/two" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonFloral3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/three" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonFloral4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/four" />
-
-                <RadioButton
-                    android:id="@+id/radioButtonFloral5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:checked="false"
-                    android:text="@string/five" />
-            </RadioGroup>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/tasteOptions">
         </LinearLayout>
 
         <LinearLayout
@@ -1371,6 +1197,10 @@
                 android:onClick="cancelCoffeeLog"
                 android:text="@string/cancel" />
         </LinearLayout>
-
+        <include
+            layout="@layout/footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right" />
     </LinearLayout>
 </ScrollView>

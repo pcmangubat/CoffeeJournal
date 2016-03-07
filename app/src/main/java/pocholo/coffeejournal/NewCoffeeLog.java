@@ -15,13 +15,16 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -43,6 +46,8 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     private RadarChart radarChart;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
     private ArrayList<RadioGroup> rgTasteProfileList;
+    private ArrayList<TextView> tasteTextViews;
+    private ArrayList<View> tasteViews;
     private DBCoffeeLogHelper mydb;
     private long db_id = 0;
 
@@ -63,14 +68,46 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             ((TextView)findViewById(R.id.textNewCoffeeLogTitle)).setText(R.string.coffee_title_new);
         }
 
+        // Create reuse layout
+        tasteTextViews = new ArrayList<>();
+        tasteViews = new ArrayList<>();
+        //ViewGroup myLayout = (ViewGroup)findViewById(R.id.tasteOptions);
+        LinearLayout myLayout = (LinearLayout)findViewById(R.id.tasteOptions);
+
+        //Sweet
+        View sweetView = LayoutInflater.from(this).inflate(R.layout.taste_rating, myLayout,false);
+        TextView sweetText = (TextView)sweetView.findViewById(R.id.textTaste);
+        sweetText.setText( getResources().getString(R.string.sweet));
+        RadioGroup radioGroupSweet = (RadioGroup)sweetView.findViewById(R.id.radioGroupTaste);
+        radioGroupSweet.setId(sweetText.generateViewId());
+        myLayout.addView(sweetView);
+
+        //Sour
+        View sourView = LayoutInflater.from(this).inflate(R.layout.taste_rating, myLayout, false);
+        TextView sourText = (TextView)sourView.findViewById(R.id.textTaste);
+        sourText.setText( getResources().getString(R.string.sour));
+        RadioGroup radioGroupSour = (RadioGroup)sourView.findViewById(R.id.radioGroupTaste);
+        radioGroupSour.setId(sourView.generateViewId());
+        myLayout.addView(sourView);
+
+        //Floral
+        View floralView = getLayoutInflater().inflate(R.layout.taste_rating, myLayout, false);
+        TextView floralText = (TextView)floralView.findViewById(R.id.textTaste);
+        floralText.setText( getResources().getString(R.string.floral));
+        RadioGroup radioGroupFloral = (RadioGroup)floralView.findViewById(R.id.radioGroupTaste);
+        radioGroupFloral.setId(floralView.generateViewId());
+        myLayout.addView(floralView);
         // Create DB Helper
         mydb = new DBCoffeeLogHelper(this);
 
         // Load List with Radio Groups
         rgTasteProfileList = new ArrayList<>();
-        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSweet));
-        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSour));
-        rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupFloral));
+        //rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSweet));
+        //rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSour));
+        rgTasteProfileList.add(radioGroupSweet);
+        rgTasteProfileList.add(radioGroupSour);
+        rgTasteProfileList.add(radioGroupFloral);
+        //rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupFloral));
         rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSpicy));
         rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupSalty));
         rgTasteProfileList.add((RadioGroup) findViewById(R.id.radioGroupBerry));

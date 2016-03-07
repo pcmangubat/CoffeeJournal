@@ -3,16 +3,22 @@ package pocholo.coffeejournal;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -26,6 +32,36 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        try {
+            Resources res = getResources();
+            InputStream inputStreamRaw = res.openRawResource(R.raw.raw);
+
+            byte[] bufferRaw = new byte[inputStreamRaw.available()];
+            inputStreamRaw.read(bufferRaw);
+            inputStreamRaw.close();
+
+            ((TextView) findViewById(R.id.rawText)).setText( new String(bufferRaw));
+
+
+            AssetManager assetManager = getAssets();
+            InputStream inputStream = assetManager.open("asset.txt");
+
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            inputStream.close();
+
+            String text = new String(buffer);
+            TextView assetText = (TextView)findViewById(R.id.assetText);
+            assetText.setText(text);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         alert = new AlertDialog.Builder(this);
 
@@ -102,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     @Override

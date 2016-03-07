@@ -1,0 +1,4 @@
+<transition xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/coffee_icon_background" />
+    <item android:drawable="@drawable/coffe_bean" />
+</transition>

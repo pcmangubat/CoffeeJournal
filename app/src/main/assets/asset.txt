@@ -1,0 +1,1 @@
+Hi you are reading text from an asset. Happy Coffee!

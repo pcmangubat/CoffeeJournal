@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<TextView
+    android:id="@+id/textTaste"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:text="@string/sweet"
+    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+<RadioGroup
+android:id="@+id/radioGroupTaste"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_weight="1"
+android:orientation="horizontal">
+
+<RadioButton
+    android:id="@+id/radioButton1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:checked="true"
+    android:text="@string/one" />
+
+<RadioButton
+    android:id="@+id/radioButton2"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:checked="false"
+    android:text="@string/two" />
+
+<RadioButton
+    android:id="@+id/radioButton3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:checked="false"
+    android:text="@string/three" />
+
+<RadioButton
+    android:id="@+id/radioButton4"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:checked="false"
+    android:text="@string/four" />
+
+<RadioButton
+    android:id="@+id/radioButton5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:checked="false"
+    android:text="@string/five" />
+</RadioGroup>
+</LinearLayout>
