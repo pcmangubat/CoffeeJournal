@@ -26,6 +26,7 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
     public static final String COFFEELOG_COLUMN_OVERALL = "overall";
     public static final String COFFEELOG_COLUMN_TASTEPROFILE = "tasteprofile";
     public static final String COFFEELOG_COLUMN_NOTES = "notes";
+    public static final String COFFEELOG_COLUMN_IMAGELOCATION = "imagelocation";
 
     public DBCoffeeLogHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -48,7 +49,8 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
                         COFFEELOG_COLUMN_WATERGRAMS + " grams," +
                         COFFEELOG_COLUMN_OVERALL + " rating," +
                         COFFEELOG_COLUMN_TASTEPROFILE + " ratings," +
-                        COFFEELOG_COLUMN_NOTES + " text)"
+                        COFFEELOG_COLUMN_NOTES + " text," +
+                        COFFEELOG_COLUMN_IMAGELOCATION + " text)"
         );
     }
 
@@ -73,6 +75,7 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
         contentValues.put(COFFEELOG_COLUMN_OVERALL, coffeeLog.Overall);
         contentValues.put(COFFEELOG_COLUMN_TASTEPROFILE, coffeeLog.TasteProfile);
         contentValues.put(COFFEELOG_COLUMN_NOTES, coffeeLog.Notes);
+        contentValues.put(COFFEELOG_COLUMN_IMAGELOCATION    , coffeeLog.ImageLocation);
 
         return db.insert(COFFEELOG_TABLE_NAME, null, contentValues);
     }
@@ -96,6 +99,7 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
             coffeeLog.Overall = res.getInt(res.getColumnIndex(COFFEELOG_COLUMN_OVERALL));
             coffeeLog.TasteProfile = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_TASTEPROFILE));
             coffeeLog.Notes = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_NOTES));
+            coffeeLog.ImageLocation = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_IMAGELOCATION));
             if (!res.isClosed()) {
                 res.close();
             }
@@ -125,6 +129,7 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
         contentValues.put(COFFEELOG_COLUMN_OVERALL, coffeeLog.Overall);
         contentValues.put(COFFEELOG_COLUMN_TASTEPROFILE, coffeeLog.TasteProfile);
         contentValues.put(COFFEELOG_COLUMN_NOTES, coffeeLog.Notes);
+        contentValues.put(COFFEELOG_COLUMN_IMAGELOCATION, coffeeLog.ImageLocation);
 
         return db.update(COFFEELOG_TABLE_NAME, contentValues, COFFEELOG_COLUMN_ID + " = ? ", new String[]{Long.toString(id)});
     }
@@ -159,6 +164,7 @@ public class DBCoffeeLogHelper extends SQLiteOpenHelper {
             coffeeLog.Overall = res.getInt(res.getColumnIndex(COFFEELOG_COLUMN_OVERALL));
             coffeeLog.TasteProfile = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_TASTEPROFILE));
             coffeeLog.Notes = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_NOTES));
+            coffeeLog.ImageLocation = res.getString(res.getColumnIndex(COFFEELOG_COLUMN_IMAGELOCATION));
 
             array_list.add(coffeeLog);
             res.moveToNext();

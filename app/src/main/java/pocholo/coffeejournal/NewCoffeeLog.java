@@ -1,8 +1,15 @@
 package pocholo.coffeejournal;
 
+import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,11 +19,21 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NavUtils;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
+import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -24,6 +41,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -40,7 +58,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewCoffeeLog extends Activity implements OnClickListener {
+    public class NewCoffeeLog extends AppCompatActivity implements OnClickListener {
+
 
     //UI References
     //private EditText brewTxt;
@@ -60,6 +79,13 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_coffee_log);
+
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ButterKnife.bind(this);
         // set id if 0 then new record, > 0 means record from database and just update
         db_id = 0;
@@ -218,6 +244,11 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         ((EditText) findViewById(R.id.editTextCoffeeGrams)).setText(String.valueOf(coffeeLog.CoffeeGrams));
         ((EditText) findViewById(R.id.editTextWaterGrams)).setText(String.valueOf(coffeeLog.WaterGrams));
         ((EditText) findViewById(R.id.editTextNotes)).setText(coffeeLog.Notes);
+        ((TextView) findViewById(R.id.imageLocation)).setText(coffeeLog.ImageLocation);
+        ImageView image = (ImageView)findViewById(R.id.uxImageView);
+        Bitmap imageBitmap = BitmapFactory.decodeFile(coffeeLog.ImageLocation);
+        if(imageBitmap != null)
+            imageView.setImageBitmap(imageBitmap);
 
 
         setRadioGroupCheck(R.id.radioGroupBrewMethod, coffeeLog.BrewMethod);
@@ -369,6 +400,19 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                //NavUtils.navigateUpFromSameTask(this);
+                navigateUpTo(new Intent(this, MainActivity.class));
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == brewTxt) {
             brewDatePickerDialog.show();
@@ -385,7 +429,8 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         coffeeLog.City = ((EditText) findViewById(R.id.editTextCity)).getText().toString();
         coffeeLog.Country = ((AutoCompleteTextView) findViewById(R.id.editTextCountry)).getText().toString();
         String dateStr = ((EditText) findViewById(R.id.editTextRoastDate)).getText().toString();
-
+        String imageStr = ((TextView) findViewById(R.id.imageLocation)).getText().toString();
+        coffeeLog.ImageLocation = imageStr;
         //SimpleDateFormat curFormater = new SimpleDateFormat("MM/dd/yyyy",Locale.US);
         Date date = new Date();
         try {
@@ -458,6 +503,16 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             }
         } else {
             if (mydb.insertCoffeeLog(getCoffeeLogDetails(db_id)) > 0) {
+
+                Notification notification = new Notification.Builder(this)
+                        .setContentTitle("New Coffee Log")
+                        .setContentText(getCoffeeLogDetails(db_id).Name)
+                        .setSmallIcon(R.drawable.small_coffee)
+                        .setPriority(Notification.PRIORITY_DEFAULT)
+                        .setStyle(new Notification.BigTextStyle().bigText("New Coffee Log Created")) // optional
+                        .build();
+                NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                notificationManager.notify(1, notification);
                 Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getApplicationContext(), "not done", Toast.LENGTH_SHORT).show();
@@ -466,4 +521,99 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
             startActivity(intent);
         }
     }
+
+
+
+
+        public static final int MEDIA_TYPE_IMAGE = 1;
+        public static final int MEDIA_TYPE_VIDEO = 2;
+        private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+        @Bind(R.id.uxImageView)
+        public ImageView imageView;
+        private File filePath;
+
+          private File getOutputMediaFile(int type) {
+            // To be safe, you should check that the SDCard is mounted
+            // using Environment.getExternalStorageState() before doing this.
+
+            Log.d("sdcard state=", Environment.getExternalStorageState());
+
+            File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                    Environment.DIRECTORY_PICTURES), "MyNewCameraApp");
+            Log.d("dir=", mediaStorageDir.toString());
+
+            // This location works best if you want the created images to be shared
+            // between applications and persist after your app has been uninstalled.
+
+            // Create the storage directory if it does not exist
+            if (!mediaStorageDir.exists()) {
+                if (!mediaStorageDir.mkdirs()) {
+                    Log.d("MyCameraApp", "failed to create directory");
+                    return null;
+                }
+            }
+
+            // Create a media file name
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            File mediaFile;
+            if (type == MEDIA_TYPE_IMAGE) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                        "IMG_" + timeStamp + ".jpg");
+            } else if (type == MEDIA_TYPE_VIDEO) {
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                        "VID_" + timeStamp + ".mp4");
+            } else {
+                return null;
+            }
+
+            Log.d("mediaFile", mediaFile.getAbsolutePath());
+
+            return mediaFile;
+        }
+
+        @OnClick(R.id.uxCamera)
+        public void onCamera(View view) {
+
+
+            // Create Intent to take a picture and return control to the calling application
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            filePath = getOutputMediaFile(MEDIA_TYPE_IMAGE); // create a file to save the image
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(filePath)); // set the image file name
+
+            // Check if there is a camera application
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+            }
+        }
+
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+            if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+                if (resultCode == RESULT_OK) {
+                    if (data == null) {
+                        Bitmap imageBitmap = BitmapFactory.decodeFile(filePath.getAbsolutePath());
+                        TextView tmp = (TextView)findViewById(R.id.imageLocation);
+                        tmp.setText(filePath.getAbsolutePath());
+                        imageView.setImageBitmap(imageBitmap);
+                    }
+                    else{
+                        Bundle extras = data.getExtras();
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+                        imageView.setImageBitmap(imageBitmap);
+                    }
+                } else if (resultCode == RESULT_CANCELED) {
+                    // User cancelled the image capture
+                    Toast.makeText(this, "Image capture cancelled", Toast.LENGTH_LONG).show();
+                } else {
+                    // Image capture failed, advise user
+                    Toast.makeText(this, "Image capture failed", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+
+
+
 }

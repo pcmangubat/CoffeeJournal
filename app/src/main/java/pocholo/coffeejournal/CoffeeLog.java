@@ -16,4 +16,5 @@ public class CoffeeLog {
     public int Overall;
     public String TasteProfile = "1111111111111111"; // 16 1'S
     public String Notes;
+    public String ImageLocation;
 }

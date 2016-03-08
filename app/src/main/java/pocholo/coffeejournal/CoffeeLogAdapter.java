@@ -1,11 +1,14 @@
 package pocholo.coffeejournal;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.RadarChart;
@@ -35,7 +38,12 @@ public class CoffeeLogAdapter extends ArrayAdapter<CoffeeLog> {
         TextView textRoaster = (TextView) convertView.findViewById(R.id.Roaster);
         TextView textCountry = (TextView) convertView.findViewById(R.id.Country);
         TextView textMethod = (TextView) convertView.findViewById(R.id.BrewMethod);
+        ImageView image = (ImageView) convertView.findViewById(R.id.uxImageView2);
 
+
+        Bitmap imageBitmap = BitmapFactory.decodeFile(coffeeLog.ImageLocation);
+        if(imageBitmap != null)
+            image.setImageBitmap(imageBitmap);
         // Initialize Radar Chart
         RadarChart radarChart = (RadarChart) convertView.findViewById(R.id.chartMini);
         if (radarChart != null) {

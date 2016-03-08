@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="false">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,6 +17,15 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:weightSum="1"
         tools:context="pocholo.coffeejournal.NewCoffeeLog">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         <include layout="@layout/header"
             android:layout_width="wrap_content"
@@ -346,6 +356,21 @@
             android:maxLines="10"
             android:minLines="4"
             android:scrollbars="vertical" />
+
+        <Button android:id="@+id/uxCamera"
+            android:text="Click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/uxImageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp" />
+        <TextView
+            android:id="@+id/imageLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart"
