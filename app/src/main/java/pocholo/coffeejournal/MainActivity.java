@@ -3,6 +3,7 @@ package pocholo.coffeejournal;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,8 +37,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
 
+        // 5. Check to see if we have a camera hardware
+        PackageManager packageManager = getPackageManager();
+        boolean hasCamera = false;
+        StringBuilder sb = new StringBuilder();
+        if(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+            sb.append("\nDevice has camera");
+            hasCamera = true;
+        } else {
+            sb.append("\nDevice has no camera");
+            hasCamera = false;
+        }
 
+        final TextView cameraText = new TextView(this);
+        // Display information in TextView
+        cameraText.setText(sb.toString());
+        LinearLayout mainPage = (LinearLayout)findViewById(R.id.mainPage);
+        mainPage.addView(cameraText);
         try {
             Resources res = getResources();
             InputStream inputStreamRaw = res.openRawResource(R.raw.raw);

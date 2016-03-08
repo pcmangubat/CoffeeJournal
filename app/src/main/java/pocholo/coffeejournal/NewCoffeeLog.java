@@ -36,10 +36,15 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class NewCoffeeLog extends Activity implements OnClickListener {
 
     //UI References
-    private EditText brewTxt;
+    //private EditText brewTxt;
+    @Bind(R.id.editTextRoastDate)EditText brewTxt;
     private EditText roastTxt;
     private DatePickerDialog brewDatePickerDialog;
     private DatePickerDialog roastDatePickerDialog;
@@ -55,7 +60,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_coffee_log);
-
+        ButterKnife.bind(this);
         // set id if 0 then new record, > 0 means record from database and just update
         db_id = 0;
         Bundle bundle = getIntent().getExtras();
@@ -322,7 +327,7 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
     }
 
     private void findViewsById() {
-        brewTxt = (EditText) findViewById(R.id.editTextRoastDate);
+       // brewTxt = (EditText) findViewById(R.id.editTextRoastDate);
         brewTxt.setInputType(InputType.TYPE_NULL);
         brewTxt.requestFocus();
 
@@ -440,6 +445,8 @@ public class NewCoffeeLog extends Activity implements OnClickListener {
         startActivity(intent);
     }
 
+
+    @OnClick(R.id.buttonSave)
     public void saveCoffeeLog(View view) {
         if (db_id > 0) {
             if (mydb.updateCoffeeLog(db_id, getCoffeeLogDetails(db_id)) > 0) {
