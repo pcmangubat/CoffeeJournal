@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
@@ -50,9 +51,16 @@ public class RecyclerSaveViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         Firebase.setAndroidContext(this);
         mFirebaseRef = new Firebase("https://blinding-fire-804.firebaseio.com/").child("save");
         setContentView(R.layout.activity_recycler_view);
+
+
+        findViewById(R.id.uxSearchText).setVisibility(View.GONE);
+        findViewById(R.id.uxSearchButton).setVisibility(View.GONE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -93,6 +101,7 @@ public class RecyclerSaveViewActivity extends AppCompatActivity {
 */
         mSavedImage = new ArrayList<>();
         mAdapter = new RecyclerAdapterView(RecyclerSaveViewActivity.this,mSavedImage);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(RecyclerSaveViewActivity.this, LinearLayoutManager.VERTICAL));
         mRecyclerView.setAdapter(mAdapter);
 
         Firebase.setAndroidContext(this);

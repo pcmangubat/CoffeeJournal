@@ -208,7 +208,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public  void callWeatherService(String searchCity) {
-        Call<WeatherData> object1 = openWeatherService.getForecast(searchCity, "5",
+        Call<WeatherData> object1 = openWeatherService.getForecast(searchCity, "",
                 "4bfde779910aa08f5cd6e0b18587623e");
 
         object1.enqueue(new Callback<WeatherData>() {
@@ -275,10 +275,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
                 }
-                String[] humidity = new String[10];
-                String[] rain_description = new String[10];
-                String[] icon = new String[10];
-                String[] time = new String[10];
+                String[] humidity = new String[40];
+                String[] rain_description = new String[40];
+                String[] icon = new String[40];
+                String[] time = new String[40];
                 weathers = new ArrayList<>();
                 for (int i = 0; i < responseBody.getList().size(); i++) {
                     humidity[i] = String.valueOf(responseBody.getList().get(i).getMain().getHumidity());
