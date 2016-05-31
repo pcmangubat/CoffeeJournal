@@ -14,7 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,10 +23,54 @@
             </intent-filter>
         </activity>
         <activity android:name=".NewCoffeeLog"
+            android:label="Coffee Log"
+            android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="pocholo.coffeejournal.MainActivity" />
+        </activity>
+        <!--
+        <activity
+            android:name=".VolleyActivity"
+            android:label="@string/title_activity_volley"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pocholo.coffeejournal.MainActivity" />
+        </activity>
+-->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"
+           android:theme="@style/AppTheme.NoActionBar">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="pocholo.coffeejournal.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".RecyclerViewActivity"
+            android:label="@string/title_activity_recycler_view"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pocholo.coffeejournal.MainActivity" />
+        </activity>
+
+        <activity
+            android:name=".RecyclerSaveViewActivity"
+            android:label="@string/title_activity_recycler_save_view"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pocholo.coffeejournal.MainActivity" />
         </activity>
     </application>
 
