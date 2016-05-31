@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -29,21 +31,56 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
     private DBCoffeeLogHelper mydb;
-
+    private CoordinatorLayout coordinatorLayout;
     AlertDialog.Builder alert;
 
+
+/*
+    @OnClick(R.id.uxVolley)
+    public void onVolley(View view){
+        Intent intent = new Intent(this, VolleyActivity.class);
+        startActivity(intent);
+    }
+*/
+    @OnClick(R.id.uxMaps)
+    public void onMaps(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.uxRecyclerView)
+    public void onRecyclerView(View view){
+        Intent intent = new Intent(this, RecyclerViewActivity.class);
+        startActivity(intent);
+    }
+
+    @OnClick(R.id.uxRecyclerSaveView)
+    public void onRecyclerSaveView(View view){
+        Intent intent = new Intent(this, RecyclerSaveViewActivity.class);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+        Snackbar snackbar = Snackbar
+                .make(coordinatorLayout, "Welcome BACK!", Snackbar.LENGTH_LONG);
 
-
+        snackbar.show();
+/*
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_CONTACTS)
@@ -70,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 // result of the request.
             }
         }
-
+*/
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         // 5. Check to see if we have a camera hardware
@@ -147,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtras(dataBundle);
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(), "ID:" + id_To_Search, Toast.LENGTH_SHORT).show();
+                Snackbar snackbar1 = Snackbar.make(view, "Message is restored!", Snackbar.LENGTH_SHORT);
+                snackbar1.show();
             }
         });
 
@@ -228,7 +267,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onKeyDown(keycode, event);
     }
-
+/*
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -253,4 +292,5 @@ public class MainActivity extends AppCompatActivity {
             // permissions this app might request
         }
     }
+    */
 }
